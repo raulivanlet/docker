@@ -1,0 +1,17 @@
+---
+version: "2"
+services:
+  homer:
+    container_name: homer
+    image: b4bz/homer
+    restart: unless-stopped
+    volumes:
+      - /mnt/Data/docker/homer:/www/assets
+    ports:
+      - 8080:8080
+    #user: 1000:1000 # default
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - INIT_ASSETS=1 # default
+    

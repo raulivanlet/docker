@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  mqtt:
+    container_name: mosquitto
+    image: eclipse-mosquitto
+    restart: unless-stopped
+    command: "mosquitto -c /mosquitto-no-auth.conf"
+    volumes:
+      - /mnt/Data/docker/zigbee2mqtt/mosquitto:/mosquitto
+    ports:
+      - 1883:1883
+      - 9001:9001
+
+  zigbee2mqtt:
+    container_name: zigbee2mqtt
+    image: koenkk/zigbee2mqtt
+    restart: unless-stopped
+    privileged: true
+    volumes:
+      - /mnt/Data/docker/zigbee2mqtt/zigbee:/app/data
+      - /run/udev:/run/udev:ro
+    ports:
+      - 8091:8080
+    environment:
+      - TZ=Europe/Bucharest
+    devices:
+      - /dev/serial/by-id/___:/dev/ttyACM0

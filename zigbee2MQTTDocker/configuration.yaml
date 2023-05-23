@@ -1,0 +1,25 @@
+# MQTT settings
+
+homeassistant: true
+
+permit_join: true
+
+mqtt:
+  # MQTT base topic for Zigbee2MQTT MQTT messages
+  base_topic: zigbee2mqtt
+  # MQTT server URL
+  server: "mqtt://172.17.0.1"
+  #server: 'mqtt://localhost'
+  # MQTT server authentication, uncomment if required:
+
+  #Change these
+  #user:
+  #password:
+
+# Serial settings
+serial:
+  # Location of the adapter (see first step of this guide)
+  port: /dev/ttyACM0
+
+frontend:
+  port: 8080
