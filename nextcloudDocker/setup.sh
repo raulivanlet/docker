@@ -1,1 +1,1 @@
-cp php.ini /mnt/Data/docker/nextcloud/config/
+cp uploads.ini /mnt/Data/docker/nextcloud/php/
