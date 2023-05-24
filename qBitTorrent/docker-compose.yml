@@ -1,5 +1,15 @@
 version: "2.1"
 services:
+  sftp:
+    container_name: sftp
+    image: atmoz/sftp
+    restart: unless-stopped
+    volumes:
+        - /mnt/Data/docker/qbittorrent/downloads:/home/foo/upload
+    ports:
+        - "2222:22"
+    command: foo:pass:1001
+
   qbittorrent:
     container_name: qbittorrent
     image: lscr.io/linuxserver/qbittorrent:latest
@@ -8,11 +18,13 @@ services:
       - /mnt/Data/docker/qbittorrent/config:/config
       - /mnt/Data/docker/qbittorrent/downloads:/downloads
     ports:
-      - 8080:8080
+      - 8086:8080
       #- 6881:6881
       #- 6881:6881/udp
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
+      #- PUID=1000
+      #- PGID=1000
+      #- TZ=Etc/UTC
       - WEBUI_PORT=8080
+
+

@@ -1,6 +1,12 @@
 version: '2'
+
+volumes:
+  nextcloud:
+  db:
+
 services:
-  database:
+  db:
+    container_name: mariadb
     image: mariadb:10.6
     restart: unless-stopped
     command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
@@ -12,26 +18,21 @@ services:
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
 
-  nextcloud:
+  app:
     container_name: nextcloud
     image: nextcloud
     restart: unless-stopped
-    links:
-      - database
     ports:
-      - 443:443
-      - 8090:80
+      - 8084:80
+    links:
+      - db
     volumes:
       - /mnt/Data/docker/nextcloud/html:/var/www/html
-      - /mnt/Data/docker/nextcloud/data:/var/www/html/data
-      - /mnt/Data/docker/nextcloud/config:/var/www/html/config
-      - /mnt/Data/docker/nextcloud/php:/usr/local/etc/php/conf.d/
+      - /mnt/Data/docker/nextcloud/php:/usr/local/etc/php/
     environment:
-      #- PHP_MEMORY_LIMIT=1G
       - MYSQL_PASSWORD=
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
       - MYSQL_HOST=db
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
+      - PHP_MEMORY_LIMIT=1024M
+      - PHP_UPLOAD_LIMIT=64G
