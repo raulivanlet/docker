@@ -5,9 +5,10 @@ services:
     image: atmoz/sftp
     restart: unless-stopped
     volumes:
-        - /mnt/Data/docker/qbittorrent/downloads:/home/foo/upload
+      #- /mnt/Data/docker/qbittorrent/downloads:/home/foo/upload
+      - /mnt/Data/docker/sftp/downloads:/home/foo/upload
     ports:
-        - "2222:22"
+      - "2222:22"
     command: foo:pass:1001
 
   qbittorrent:
