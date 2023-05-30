@@ -6,10 +6,10 @@ services:
     image: lscr.io/linuxserver/jellyfin:latest
     restart: unless-stopped
     volumes:
-      - /mnt/Data/docker/jellyfin/data:/app/data
-      - /mnt/Data/docker/jellyfin/config:/config
-      - /mnt/Data/docker/jellyfin/tvshows:/data/tvshows
-      - /mnt/Data/docker/jellyfin/movies:/data/movies
+      - /home/${USER}/data/jellyfin/data:/app/data
+      - /home/${USER}/data/jellyfin/config:/config
+      - /home/${USER}/data/jellyfin/tvshows:/data/tvshows
+      - /home/${USER}/data/jellyfin/movies:/data/movies
     ports:
       - 8086:8096
       #- 8920:8920 #optional

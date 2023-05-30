@@ -6,7 +6,7 @@ services:
     restart: unless-stopped
     command: "mosquitto -c /mosquitto-no-auth.conf"
     volumes:
-      - /mnt/Data/docker/zigbee2mqtt/mosquitto:/mosquitto
+      - /home/${USER}/data/zigbee2mqtt/mosquitto:/mosquitto
     ports:
       - 1883:1883
       - 9001:9001
@@ -17,7 +17,7 @@ services:
     restart: unless-stopped
     privileged: true
     volumes:
-      - /mnt/Data/docker/zigbee2mqtt/zigbee:/app/data
+      - /home/${USER}/data/zigbee2mqtt/zigbee:/app/data
       - /run/udev:/run/udev:ro
     ports:
       - 8089:8080

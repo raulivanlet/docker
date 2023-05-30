@@ -6,7 +6,7 @@ services:
     image: octoprint/octoprint
     restart: unless-stopped    
     volumes:
-      - /mnt/Data/docker/octoprint:/octoprint
+      - /home/${USER}/data/octoprint:/octoprint
     ports:
       - 8084:80
     environment:

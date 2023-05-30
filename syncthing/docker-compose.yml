@@ -11,9 +11,9 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - /mnt/Data/docker/syncthing/config:/config
-      - /mnt/Data/docker/syncthing/data1:/data1
-      - /mnt/Data/docker/syncthing/data2:/data2
+      - /home/${USER}/data/syncthing/config:/config
+      - /home/${USER}/data/syncthing/data1:/data1
+      - /home/${USER}/data/syncthing/data2:/data2
     ports:
       - 8384:8384
       - 22000:22000/tcp

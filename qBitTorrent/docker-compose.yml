@@ -5,8 +5,8 @@ services:
     image: atmoz/sftp
     restart: unless-stopped
     volumes:
-      #- /mnt/Data/docker/qbittorrent/downloads:/home/foo/upload
-      - /mnt/Data/docker/sftp/downloads:/home/foo/upload
+      - /home/${USER}/data/qbittorrent/downloads:/home/foo/upload
+      - /home/${USER}/data/sftp/downloads:/home/foo/upload
     ports:
       - "2222:22"
     command: foo:pass:1001
@@ -16,8 +16,8 @@ services:
     image: lscr.io/linuxserver/qbittorrent:latest
     restart: unless-stopped
     volumes:
-      - /mnt/Data/docker/qbittorrent/config:/config
-      - /mnt/Data/docker/qbittorrent/downloads:/downloads
+      - /home/${USER}/data/qbittorrent/config:/config
+      - /home/${USER}/data/qbittorrent/downloads:/downloads
     ports:
       - 8086:8080
       #- 6881:6881
