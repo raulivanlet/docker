@@ -1,3 +1,4 @@
+---
 version: '2'
 
 volumes:
@@ -11,10 +12,10 @@ services:
     restart: unless-stopped
     command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
     volumes:
-      - /home/${USER}/data/zigbee2mqtt/mariadb:/var/lib/mysql
+      - ${HOME}/data/nextcloud/mariadb:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=
-      - MYSQL_PASSWORD=
+      - MYSQL_ROOT_PASSWORD=${MARIADBPASS}
+      - MYSQL_PASSWORD=${MYSQLPASS}
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
 
@@ -22,15 +23,15 @@ services:
     container_name: nextcloud
     image: nextcloud
     restart: unless-stopped
-    ports:
-      - 8085:80
     links:
       - db
+    ports:
+      - 8085:80
     volumes:
-      - /home/${USER}/data/nextcloud/html:/var/www/html
-      #- /home/${USER}/data/nextcloud/php:/usr/local/etc/php/
+      - ${HOME}/data/nextcloud/html:/var/www/html
+      #- ${HOME}/data/nextcloud/php:/usr/local/etc/php/
     environment:
-      - MYSQL_PASSWORD=
+      - MYSQL_PASSWORD=${MYSQLPASS}
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
       - MYSQL_HOST=db

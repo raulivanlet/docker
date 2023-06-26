@@ -5,18 +5,18 @@ services:
     container_name: jellyfin
     image: lscr.io/linuxserver/jellyfin:latest
     restart: unless-stopped
-    volumes:
-      - /home/${USER}/data/jellyfin/data:/app/data
-      - /home/${USER}/data/jellyfin/config:/config
-      - /home/${USER}/data/jellyfin/tvshows:/data/tvshows
-      - /home/${USER}/data/jellyfin/movies:/data/movies
     ports:
       - 8086:8096
       #- 8920:8920 #optional
       #- 7359:7359/udp #optional
       #- 1900:1900/udp #optional
+    volumes:
+      - ${HOME}/data/jellyfin/data:/app/data
+      - ${HOME}/data/jellyfin/config:/config
+      - ${HOME}/data/jellyfin/movies:/data/movies
+      - ${HOME}/data/jellyfin/tvshows:/data/tvshows
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Etc/UTC
-      - JELLYFIN_PublishedServerUrl=192.168.0.5 #optional
+      - TZ=Europe/Bucharest
+      #- JELLYFIN_PublishedServerUrl=192.168.0.5 #optional

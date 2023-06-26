@@ -5,23 +5,27 @@ services:
     image: eclipse-mosquitto
     restart: unless-stopped
     command: "mosquitto -c /mosquitto-no-auth.conf"
-    volumes:
-      - /home/${USER}/data/zigbee2mqtt/mosquitto:/mosquitto
+    #user: 1000:1000
     ports:
       - 1883:1883
       - 9001:9001
+    volumes:
+      - ${HOME}/data/zigbee2mqtt/mosquitto:/mosquitto
 
   zigbee2mqtt:
     container_name: zigbee2mqtt
     image: koenkk/zigbee2mqtt
     restart: unless-stopped
+    #group_add:
+      #- 20
+    #user: 1000:1000
     privileged: true
-    volumes:
-      - /home/${USER}/data/zigbee2mqtt/zigbee:/app/data
-      - /run/udev:/run/udev:ro
     ports:
       - 8089:8080
+    volumes:
+      - ${HOME}/data/zigbee2mqtt/zigbee:/app/data
+      - /run/udev:/run/udev:ro
     environment:
       - TZ=Europe/Bucharest
     devices:
-      - /dev/serial/by-id/___:/dev/ttyACM0
+      - /dev/serial/by-id/pci-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_1c26f5a3ea5fec11920b325f25bfaa52-if00-port0:/dev/ttyACM0
